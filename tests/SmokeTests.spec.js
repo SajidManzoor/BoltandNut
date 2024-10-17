@@ -12,7 +12,7 @@ test.beforeAll(async ({ browser }) => {
 });
 
 
-test("SubCategory Filter-POM", async () => {
+test("SubCategory Filter", async () => {
   await page.goto("/allthread");
   await utils.selectCategory("Metric Fine");
   expect(await page.url()).toContain("cat");
