@@ -45,12 +45,3 @@ jobs:
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
         
-#     - name: Slack Notification
-#       uses: rtCamp/action-slack-notify@v2
-#       if: always()
-#       env:
-#         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-#         SLACK_USERNAME: sajid
-#         SLACK_TITLE: "Environment: Production \n Build Status: ${{ job.status }}"
-#         SLACK_COLOR: ${{ job.status }}
-#         SLACK_FOOTER: see report at https://sajidmanzoor.github.io/FlexiSkip-Automation-with-Playwright/
