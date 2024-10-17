@@ -1,0 +1,9 @@
+ Total = /$/26.6 ($28.00/ea)
+subTotal is  28.00
+in if
+ Total = /$/34.2 ($18.00/ea)
+subTotal is  36.00
+in if
+ Total = /$/45.6 ($16.00/ea)
+subTotal is  48.00
+in if
