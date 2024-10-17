@@ -1,0 +1,16 @@
+{
+  '1': { pricePerEach: '28.00', subTotal: '28.00' },
+  '2': { pricePerEach: '18.00', subTotal: '36.00' },
+  '3': { pricePerEach: '16.00', subTotal: '48.00' },
+  '5': { pricePerEach: '14.00', subTotal: '70.00' },
+  '10': { pricePerEach: '13.00', subTotal: '130.00' },
+  '20': { pricePerEach: '12.00', subTotal: '240.00' },
+  '30': { pricePerEach: '10.00', subTotal: '300.00' },
+  '50': { pricePerEach: '9.00', subTotal: '450.00' }
+}
+rowCount 3
+{
+  '5': { discountUpperLimit: '99' },
+  '10': { discountUpperLimit: '249' },
+  '15': { discountUpperLimit: '250' }
+}
