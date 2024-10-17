@@ -1,4 +1,4 @@
-# FlexiSkip-Automation
+# Bolt And Nut Automation
 ## Test Automation using Microsoft Playwright
 
 - IDE: Microsoft Visual Studio Code
