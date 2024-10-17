@@ -1,0 +1,55 @@
+# name: playwright-allure-report
+# on:
+#   push:
+#   schedule:
+#     - cron: '0 0 * * *'
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@main
+#     - name: Use Node.js 
+#       uses: actions/setup-node@main
+#       with:
+#         node-version: 20
+#         cache: 'npm'
+#     - run: npm ci
+#     - run: npm run build --if-present
+#     - run: npm test
+
+#     - name: Get Allure history
+#       uses: actions/checkout@main
+#       if: always()
+#       continue-on-error: true
+#       with:
+#         ref: gh-pages
+#         path: gh-pages
+
+#     - name: Allure Report action from marketplace
+#       uses: simple-elf/allure-report-action@master
+#       if: always()
+#       id: allure-report
+#       with:
+#         allure_results: allure-results
+#         gh_pages: gh-pages
+#         allure_report: allure-report
+#         allure_history: allure-history
+
+#     - name: Deploy report to Github Pages
+#       if: always()
+#       uses: peaceiris/actions-gh-pages@v3
+#       with:
+#         PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         PUBLISH_BRANCH: gh-pages
+#         PUBLISH_DIR: allure-history
+        
+#     - name: Slack Notification
+#       uses: rtCamp/action-slack-notify@v2
+#       if: always()
+#       env:
+#         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#         SLACK_USERNAME: sajid
+#         SLACK_TITLE: "Environment: Production \n Build Status: ${{ job.status }}"
+#         SLACK_COLOR: ${{ job.status }}
+#         SLACK_FOOTER: see report at https://sajidmanzoor.github.io/FlexiSkip-Automation-with-Playwright/
