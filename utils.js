@@ -19,7 +19,7 @@ export class Utils {
     this.quantity = page.locator("[name='qty']").first();
     this.header = page.locator(".dz-head-notice");
     this.discountAppliedText = this.product.locator(".dz_spend_disc_note");
-    this.totalPriceText=page.locator('//@[class=".dz_qty_note"]').first()
+    this.totalPriceText=page.locator('//*[@class="dz_qty_note"]').first()
   
   }
 
@@ -51,6 +51,8 @@ export class Utils {
   }
   async closeViewPricingPopup() {
     await this.header.click();
+    await expect(this.viewPricingPopup).not.toBeVisible();
+
   }
   async increaseQuantity() {
     await this.increaseQuantityButton.click();
@@ -115,14 +117,16 @@ export class Utils {
 
   for (var i=0;i<Object.keys(pricingData).length;i++)
     {
+      console.log('Quantity',Object.keys(pricingData)[i])
+      // console.log(String(pricingData[Object.keys(pricingData)[i]].pricePerEach))
       await this.setQuantity(Object.keys(pricingData)[i])
       await this.verifyQuantity(Object.keys(pricingData)[i])
-
-      await expect(this.totalPriceText.textContent()).toEqual(" Total = $"+pricingData[Object.keys(pricingData)['subTotal']]+" ($"+pricingData[Object.keys(pricingData)['pricePerEach']]+"/ea)")
-      
+      if(Object.keys(pricingData)[i].subTotal<=99)
+      {
+      await expect(await this.totalPriceText.innerText()).toEqual(" Total = /$/"+String(pricingData[Object.keys(pricingData)[i]].subTotal-((pricingData[Object.keys(pricingData)[i]].subTotal)*0.05))+" ($"+String(pricingData[Object.keys(pricingData)[i]].pricePerEach)+"/ea)")
+      }
     }
 
-  return keys;
    
    
   }
