@@ -46,11 +46,11 @@ export class Utils {
     await this.viewPricingButton.click();
   }
   async verifyViewPricingPopup() {
-    await expect(this.viewPricingPopup).toBeVisible();
+    await expect(await this.viewPricingPopup).toBeVisible();
   }
   async closeViewPricingPopup() {
     await this.header.click();
-    await expect(this.viewPricingPopup).not.toBeVisible();
+    await expect(await this.viewPricingPopup).not.toBeVisible();
   }
   async increaseQuantity() {
     await this.increaseQuantityButton.click();
@@ -112,24 +112,53 @@ export class Utils {
       discountData[discountPercentage] = { discountUpperLimit };
     }
     await this.closeViewPricingPopup();
+    for (const [key, value] of Object.entries(pricingData)) {
+      await this.setQuantity(key);
+      await this.verifyQuantity(key);
+      var discountRate;
+      var discountedSubTotal;
+      var discountedPricePerEach;
 
-    for (var i = 0; i < Object.keys(pricingData).length; i++) {
-      await this.setQuantity(Object.keys(pricingData)[i]);
-      await this.verifyQuantity(Object.keys(pricingData)[i]);
-      if (pricingData[Object.keys(pricingData)[i]].subTotal <= 99) {
-        await expect(await this.totalPriceText.innerText()).toEqual(
-          " Total = $" +
-            (
-              pricingData[Object.keys(pricingData)[i]].subTotal -
-              pricingData[Object.keys(pricingData)[i]].subTotal * 0.05
-            ).toFixed(2) +
-            " ($" +
-            (
-              pricingData[Object.keys(pricingData)[i]].pricePerEach -
-              pricingData[Object.keys(pricingData)[i]].pricePerEach * 0.05
-            ).toFixed(2) +
-            "/ea)"
-        );
+      var expectedText;
+      if (value.subTotal <= 99) {
+        discountRate = 0.05;
+        discountedSubTotal = value.subTotal * (1 - discountRate);
+        discountedPricePerEach = value.pricePerEach * (1 - discountRate);
+        expectedText = ` Total = ${discountedSubTotal.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })} (${discountedPricePerEach.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })}/ea)`;
+
+        expect(await this.totalPriceText.innerText()).toEqual(expectedText);
+      } else if (value.subTotal > 99 && value <= 249) {
+        discountRate = 0.1;
+        discountedSubTotal = value.subTotal * (1 - discountRate);
+        discountedPricePerEach = value.pricePerEach * (1 - discountRate);
+        expectedText = ` Total = ${discountedSubTotal.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })} (${discountedPricePerEach.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })}/ea)`;
+
+        expect(await this.totalPriceText.innerText()).toEqual(expectedText);
+      } else if (value.subTotal > 249) {
+        discountRate = 0.15;
+        discountedSubTotal = value.subTotal * (1 - discountRate);
+        discountedPricePerEach = value.pricePerEach * (1 - discountRate);
+        expectedText = ` Total = ${discountedSubTotal.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })} (${discountedPricePerEach.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })}/ea)`;
+
+        expect(await this.totalPriceText.innerText()).toEqual(expectedText);
       }
     }
   }
