@@ -69,8 +69,7 @@ export class Utils {
     await this.verifyViewPricingPopup();
     var rowCount = await this.viewPricingPopup.getByRole("row").count();
     var pricingData = {};
-    // const regex = /\d+(\.\d+)?/g;
-    const regex = /\d+(\.\d{1,2})?/g
+    const regex = /\d+(\.\d{1,2})?/g;
     for (let i = 1; i < rowCount - 3; i++) {
       var quantity = await this.viewPricingPopup
         .getByRole("row")
@@ -117,27 +116,18 @@ export class Utils {
     for (var i = 0; i < Object.keys(pricingData).length; i++) {
       await this.setQuantity(Object.keys(pricingData)[i]);
       await this.verifyQuantity(Object.keys(pricingData)[i]);
-      console.log(
-        " Total = /$/" +
-          (pricingData[Object.keys(pricingData)[i]].subTotal -
-            pricingData[Object.keys(pricingData)[i]].subTotal * 0.05) +
-          " ($" +
-          pricingData[Object.keys(pricingData)[i]].pricePerEach +
-          "/ea)"
-      );
-      console.log(
-        "subTotal is ",
-        pricingData[Object.keys(pricingData)[i]].subTotal
-      );
       if (pricingData[Object.keys(pricingData)[i]].subTotal <= 99) {
-        console.log("in if");
         await expect(await this.totalPriceText.innerText()).toEqual(
           " Total = $" +
-            (pricingData[Object.keys(pricingData)[i]].subTotal -
-              pricingData[Object.keys(pricingData)[i]].subTotal * 0.05).toFixed(2) +
+            (
+              pricingData[Object.keys(pricingData)[i]].subTotal -
+              pricingData[Object.keys(pricingData)[i]].subTotal * 0.05
+            ).toFixed(2) +
             " ($" +
-            (pricingData[Object.keys(pricingData)[i]].pricePerEach -
-              pricingData[Object.keys(pricingData)[i]].pricePerEach * 0.05).toFixed(2) +
+            (
+              pricingData[Object.keys(pricingData)[i]].pricePerEach -
+              pricingData[Object.keys(pricingData)[i]].pricePerEach * 0.05
+            ).toFixed(2) +
             "/ea)"
         );
       }
