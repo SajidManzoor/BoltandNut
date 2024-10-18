@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Fri Oct 18 07:02:58 GMT 2024","Fri Oct 18 07:02:58 GMT 2024","408","chromium","SmokeTests.spec.js","","","","Discount Check",""
+"passed","Fri Oct 18 07:02:57 GMT 2024","Fri Oct 18 07:02:58 GMT 2024","346","chromium","SmokeTests.spec.js","","","","Change Quantity",""
+"passed","Fri Oct 18 07:02:56 GMT 2024","Fri Oct 18 07:02:57 GMT 2024","1535","chromium","SmokeTests.spec.js","","","","View Pricing",""
+"passed","Fri Oct 18 07:02:50 GMT 2024","Fri Oct 18 07:02:56 GMT 2024","5931","chromium","SmokeTests.spec.js","","","","SubCategory Filter",""
